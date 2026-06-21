@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HydroShield</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: url("https://static.vecteezy.com/system/resources/previews/030/206/729/non_2x/ai-generated-dark-sky-and-clouds-background-storm-time-dark-thunderstorm-free-photo.jpeg")
+          no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        font-family: "Segoe UI", sans-serif;
+        color: #333;
+      }
+
+      h2 {
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+
+      /* Info boxes (Rainfall, Risk, Nearby) */
+      .info-box {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 20px;
+        width: 250px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 0 20px; /* space between boxes */
+      }
+
+      .info-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+      }
+
+      .info-box h4 {
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+
+      /* Precaution box */
+      .precaution-box {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        text-align: left;
+        margin-top: 40px;
+      }
+
+      .btn-home {
+        margin-top: 30px;
+        background-color: #007bff;
+        color: white;
+        font-weight: 500;
+      }
+
+      ul {
+        margin-top: 15px;
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h2>🌦 Prediction Result</h2>
+
+      <!-- Info Boxes Row -->
+      <div class="info-row">
+        <!-- Rainfall -->
+        <div class="info-box">
+          <h4>🌧 Rainfall (mm)</h4>
+          {% if risk == "No Immediate Risk" %}
+          <p>No Rainfall Detected</p>
+          {% else %}
+          <p>{{ rainfall }} mm</p>
+          {% endif %}
+        </div>
+
+        <!-- Risk Level -->
+        <div class="info-box">
+          <h4>⚠️ Risk Level</h4>
+          <p>{{ risk }}</p>
+        </div>
+
+        <!-- Nearby Risk Areas -->
+        <div class="info-box">
+          <h4>📍 Nearby Risk Areas</h4>
+          <p>{{ nearby }}</p>
+        </div>
+      </div>
+
+      <!-- Precautions Section (only if rainfall is detected) -->
+      {% if risk != "No Immediate Risk" %}
+      <div class="row justify-content-center">
+        <div class="col-md-10 precaution-box mt-3">
+          <h4>🛡️ Precautions During Rainfall</h4>
+          <ul>
+            <li>Close doors and windows properly.</li>
+            <li>Unplug electrical devices during heavy rain.</li>
+            <li>Use an umbrella or raincoat when going out.</li>
+            <li>Avoid walking or driving through flooded areas.</li>
+            <li>Drive slowly and stay alert on wet roads.</li>
+            <li>Clear stagnant water to prevent mosquitoes.</li>
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+      <a href="/" class="btn btn-home">🔙 Back to Prediction</a>
+    </div>
+  </body>
+</html>
